@@ -11,7 +11,10 @@ let displayOutput = document.getElementById("output");
 let buttons = document.querySelectorAll(".button")
 
 for(let i =0; i< buttons.length;i++){
-    buttons[i].addEventListener('click',() => getInput(buttons[i].textContent))
+    buttons[i].addEventListener('click',() => {
+            displayOutput.textContent = "";
+            getInput(buttons[i].textContent);
+            })
 }
 
 function getInput(input){
@@ -49,10 +52,11 @@ function getInput(input){
             break;
         case "+":
             if(operator == ""){
-            operator = "+"
-            displayInput.textContent = `${currentNum} ${operator}`;
-            previousNum = currentNum;
-            currentNum = "";
+                operator = "+"
+                displayInput.textContent = `${currentNum} ${operator}`;
+                previousNum = currentNum;
+                currentNum = "";
+                result = "";
             } else return
             break;
         case "-":
@@ -61,6 +65,8 @@ function getInput(input){
                 displayInput.textContent = `${currentNum} ${operator}`;
                 previousNum = currentNum;
                 currentNum = "";
+                result = "";
+
                 } else return
             break;
         case "*":
@@ -69,6 +75,7 @@ function getInput(input){
                 displayInput.textContent = `${currentNum} ${operator}`;
                 previousNum = currentNum;
                 currentNum = "";
+                result = "";
                 } else return
             break;
         case "/":
@@ -77,6 +84,7 @@ function getInput(input){
                 displayInput.textContent = `${currentNum} ${operator}`;
                 previousNum = currentNum;
                 currentNum = "";
+                result = "";
                 } else return
             break;
         case "=":
@@ -98,9 +106,11 @@ function getInput(input){
 }
 
 function appendNumber(num){
-    currentNum += num;
-    displayInput.textContent = `${previousNum} ${operator} ${currentNum}`;
-    return currentNum;
+    if(result == ""){
+        currentNum += num;
+        displayInput.textContent = `${previousNum} ${operator} ${currentNum}`;
+        return currentNum;
+    }
 }
 
 function clearAll(){
